@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DeliveBoo</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/DeliveBoo.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="vh-100  p-0 m-0">
+        <div class="h-100 bg-black d-flex align-items-center pt-5 flex-column">
+            <div class="bg-secondary p-3 pt-4 rounded-2 text-center">
+                <div class="fs-4 fw-bold text-white">Accedi</div>
+                <form>
+                    <div class="my-3">
+                        <label class="form-label" for="email">Email</label>
+                        <input class="form-control rounded-5" type="text" name="email" />
+                    </div>
+                    <div class="my-3">
+                        <label class="form-label">Password</label>
+                        <input class="form-control" type="password"/>
+                    </div>
+                    <div class="my-3">
+                        <button class="btn-success rounded-3 p-2" type="submit">Accedi</button>
+                    </div>
+                </form>
+            </div>
+            <div>
+                Pulsanti
+            </div>
+        </div>
+    </div>
+</body>
