@@ -1,5 +1,6 @@
 ﻿using DeliveBoo.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Diagnostics;
 
 namespace DeliveBoo.Controllers
@@ -15,7 +16,7 @@ namespace DeliveBoo.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return Redirect("Identity/Account/Login");
         }
 
         public IActionResult Privacy()

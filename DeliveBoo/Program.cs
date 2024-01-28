@@ -1,6 +1,5 @@
 using DeliveBoo.DB;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 namespace DeliveBoo
 {
     public class Program

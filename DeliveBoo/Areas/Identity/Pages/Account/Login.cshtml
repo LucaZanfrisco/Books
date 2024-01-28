@@ -5,8 +5,8 @@
     ViewData["Title"] = "Log in";
 }
 
-<div class="row">
-    <div class="col-md-4">
+<div class="row justify-content-center">
+    <div class="col-md-6 col-12">
         <section>
             <form id="account" method="post">
                 <h1 class="text-center">Accedi</h1>
@@ -26,12 +26,12 @@
                     <div class="checkbox">
                         <label asp-for="Input.RememberMe" class="form-label">
                             <input class="form-check-input" asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            Ricordami
                         </label>
                     </div>
                 </div>
                 <div>
-                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Accedi</button>
                 </div>
                 <div class="d-flex align-items-center justify-content-center gap-3 mt-3">
                     <p class="fs-5">
@@ -40,14 +40,15 @@
                     <p class="fs-5">
                         <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
                     </p>
-                   @*  <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                    @*  <p>
+                    <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
                     </p> *@
                 </div>
             </form>
         </section>
     </div>
-    @* <div class="col-md-6 col-md-offset-2">
+</div>
+@* <div class="col-md-6 col-md-offset-2">
         <section>
             <h3>Use another service to log in.</h3>
             <hr />
