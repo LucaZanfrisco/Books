@@ -1,6 +1,6 @@
+using DeliveBoo.DB;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using DeliveBoo.Areas.Identity.Data;
 namespace DeliveBoo
 {
     public class Program
@@ -8,13 +8,13 @@ namespace DeliveBoo
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-                        
 
-            builder.Services.AddDbContext<ProfileContex>();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            builder.Services.AddDbContext<Db>();
+
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ProfileContex>();
+                .AddEntityFrameworkStores<Db>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using DeliveBoo.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace DeliveBoo.Models
+namespace DeliveBoo.DB
 {
     public class Db : IdentityDbContext<IdentityUser>
     {

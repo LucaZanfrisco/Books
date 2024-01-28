@@ -15,7 +15,7 @@ namespace DeliveBoo.Controllers
 
         public IActionResult Index()
         {
-            return View("Views/Login.cshtml");
+            return View();
         }
 
         public IActionResult Privacy()
