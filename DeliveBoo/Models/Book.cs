@@ -13,9 +13,8 @@ namespace DeliveBoo.Models
         public string Author { get; set; }
         public DateTime Year { get; set; }
         public string Isbn { get; set; }
-        public string Photo { get; set; }
-        public int ProfileId { get; set; }
-        public Profile Profile { get; set; }
+        public string? Photo { get; set; }
+        public string UserId { get; set; }
         public List<Genre> Generes { get; set; }
         public List<Author> Authors { get; set; }
 
