@@ -1,4 +1,5 @@
-﻿using DeliveBoo.Models;
+﻿using DeliveBoo.DB;
+using DeliveBoo.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,19 +11,27 @@ namespace DeliveBoo.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private BookContext db;
+
+        public HomeController(ILogger<HomeController> logger,BookContext database)
         {
             _logger = logger;
+            db = database;
         }
 
         public IActionResult Index()
         {
             if(User.Identity.IsAuthenticated)
             {
-                return View();
+                using(db)
+                {
+                    List<Book> books = db.Books.ToList();
+                    return View(books);
+                }
             }
             else
             {
+                
                 return Redirect("Identity/Account/Login");
             }
         }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DeliveBoo.DB
 {
-    public class Db : IdentityDbContext<IdentityUser>
+    public class BookContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<Genre> Genres { get; set; }

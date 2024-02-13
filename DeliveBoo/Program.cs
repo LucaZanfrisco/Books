@@ -9,14 +9,15 @@ namespace DeliveBoo
             var builder = WebApplication.CreateBuilder(args);
 
 
-            builder.Services.AddDbContext<Db>();
+            builder.Services.AddDbContext<BookContext>();
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<Db>();
+                .AddEntityFrameworkStores<BookContext>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<BookContext, BookContext>();
 
             var app = builder.Build();
 
