@@ -16,17 +16,47 @@ body #dashboard {
     width: 100%;
     display: flex;
 }
-
+.active{
+    border-right: 3px solid darkgreen;
+}
 #dashboard nav {
     width: 100px;
     height: 100vh;
     background-color: #000000;
-    color: navajowhite;
+    color: antiquewhite;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+    #dashboard nav ul li{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
+    #dashboard nav ul li a {
+        color: black;
+        text-decoration: none;
+        width: 50px;
+        height: 50px;
+        background-color: antiquewhite;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 15px 0;
+    }
+#dashboard nav ul li a:hover{
+    transform: scale(1.1);
+    color: forestgreen;
+}
+#dashboard nav button{
+    color: inherit;
+}
+#dashboard nav button:hover{
+    transform: scale(1.03);
+    color: orangered;
+}
 #dashboard main {
     width: calc(100% - 100px);
 }
