@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DeliveBoo.Migrations
+namespace Books.Migrations
 {
-    [DbContext(typeof(DB.Db))]
-    [Migration("20240128162556_InitialCreate")]
-    partial class InitialCreate
+    [DbContext(typeof(Db))]
+    [Migration("20240213115746_AddedInfo")]
+    partial class AddedInfo
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,37 @@ namespace DeliveBoo.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DeliveBoo.Models.Dishe", b =>
+            modelBuilder.Entity("AuthorBook", b =>
+                {
+                    b.Property<int>("AuthorsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BooksId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AuthorsId", "BooksId");
+
+                    b.HasIndex("BooksId");
+
+                    b.ToTable("AuthorBook");
+                });
+
+            modelBuilder.Entity("BookGenre", b =>
+                {
+                    b.Property<int>("BooksId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GeneresId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BooksId", "GeneresId");
+
+                    b.HasIndex("GeneresId");
+
+                    b.ToTable("BookGenre");
+                });
+
+            modelBuilder.Entity("Books.Models.Author", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,37 +63,71 @@ namespace DeliveBoo.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Ingredients")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Authors");
+                });
+
+            modelBuilder.Entity("DeliveBoo.Models.Book", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Isbn")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Photo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProfileId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RestaurantId")
-                        .HasColumnType("int");
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Visible")
-                        .HasColumnType("bit");
+                    b.Property<DateTime>("Year")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProfileId");
 
-                    b.HasIndex("RestaurantId");
+                    b.ToTable("Book");
+                });
 
-                    b.ToTable("Dishes");
+            modelBuilder.Entity("DeliveBoo.Models.Genre", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Genres");
                 });
 
             modelBuilder.Entity("DeliveBoo.Models.Order", b =>
@@ -127,58 +191,6 @@ namespace DeliveBoo.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Profile");
-                });
-
-            modelBuilder.Entity("DeliveBoo.Models.Restaurant", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PIva")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Photo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProfileId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProfileId")
-                        .IsUnique();
-
-                    b.ToTable("Restaurant");
-                });
-
-            modelBuilder.Entity("DeliveBoo.Models.Typology", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Typologies");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -379,41 +391,41 @@ namespace DeliveBoo.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("RestaurantTypology", b =>
+            modelBuilder.Entity("AuthorBook", b =>
                 {
-                    b.Property<int>("RestaurantsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TypologiesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RestaurantsId", "TypologiesId");
-
-                    b.HasIndex("TypologiesId");
-
-                    b.ToTable("RestaurantTypology");
-                });
-
-            modelBuilder.Entity("DeliveBoo.Models.Dishe", b =>
-                {
-                    b.HasOne("DeliveBoo.Models.Profile", "Profile")
+                    b.HasOne("Books.Models.Author", null)
                         .WithMany()
-                        .HasForeignKey("ProfileId")
+                        .HasForeignKey("AuthorsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DeliveBoo.Models.Restaurant", null)
-                        .WithMany("Dishes")
-                        .HasForeignKey("RestaurantId");
-
-                    b.Navigation("Profile");
+                    b.HasOne("DeliveBoo.Models.Book", null)
+                        .WithMany()
+                        .HasForeignKey("BooksId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("DeliveBoo.Models.Restaurant", b =>
+            modelBuilder.Entity("BookGenre", b =>
+                {
+                    b.HasOne("DeliveBoo.Models.Book", null)
+                        .WithMany()
+                        .HasForeignKey("BooksId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DeliveBoo.Models.Genre", null)
+                        .WithMany()
+                        .HasForeignKey("GeneresId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DeliveBoo.Models.Book", b =>
                 {
                     b.HasOne("DeliveBoo.Models.Profile", "Profile")
-                        .WithOne("Restaurant")
-                        .HasForeignKey("DeliveBoo.Models.Restaurant", "ProfileId")
+                        .WithMany("Books")
+                        .HasForeignKey("ProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -471,30 +483,9 @@ namespace DeliveBoo.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RestaurantTypology", b =>
-                {
-                    b.HasOne("DeliveBoo.Models.Restaurant", null)
-                        .WithMany()
-                        .HasForeignKey("RestaurantsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DeliveBoo.Models.Typology", null)
-                        .WithMany()
-                        .HasForeignKey("TypologiesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("DeliveBoo.Models.Profile", b =>
                 {
-                    b.Navigation("Restaurant")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DeliveBoo.Models.Restaurant", b =>
-                {
-                    b.Navigation("Dishes");
+                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }

@@ -14,7 +14,7 @@ namespace DeliveBoo.Models
 
         public string Password { get; set; }
 
-        public Restaurant Restaurant { get; set; }
+        public List<Book> Books { get; set; }
         
     }
 }
